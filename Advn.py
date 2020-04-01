@@ -19,7 +19,6 @@ class Advfn:
         df = self.__tableSoupToDf__(soup.find('div', {'class': 'TableElement'}))
         self.__dfToAttrs__(df)
         
-    #Convert Pandas DataFrames to a object atributes
     def __dfToAttrs__(self, df):
         for column in df.columns:
             name = unidecode(column.strip().replace(' ', '_')).lower()
