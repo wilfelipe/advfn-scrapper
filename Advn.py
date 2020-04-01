@@ -58,8 +58,11 @@ class Advfn:
         soup = self.__getSoup__(url)
         
         #Getting number of pages for the iteration.
-        t = soup.find('a', {'class': 'date-control'})['href']
-        latest_page = int(parse_qs(urlparse(t).query)['current'][0])
+        try:
+            t = soup.find('a', {'class': 'date-control'})['href']
+            latest_page = int(parse_qs(urlparse(t).query)['current'][0])
+        except:
+            latest_page = 0
         
         df = self.__tableSoupToDf__(soup, {'class': 'histo-results'})
         li = [df]
@@ -74,6 +77,3 @@ class Advfn:
         df = pd.concat(li, axis=0, ignore_index=True)
         
         return df
-        
-        
-        
